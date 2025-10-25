@@ -6,16 +6,21 @@ pub struct Rotation {
     pub is_clockwise: bool,
 }
 
+pub fn rotate_index(clockwise: bool, row_index: usize, column_index: usize) -> (usize, usize) {
+    if clockwise {
+        (column_index, 2 - row_index)
+    } else {
+        (2 - column_index, row_index)
+    }
+}
+
 pub fn rotate_face(face: &mut Tensor2<Color, ROW_COUNT, COLUMN_COUNT>, clockwise: bool) {
-    for old_row_index in 0..ROW_COUNT {
-        for old_column_index in 0..COLUMN_COUNT {
+    for row_index in 0..ROW_COUNT {
+        for column_index in 0..COLUMN_COUNT {
             let old = face.clone();
-            let (face_row_index, face_column_index) = if clockwise {
-                (old_column_index, 2 - old_row_index)
-            } else {
-                (2 - old_column_index, old_row_index)
-            };
-            face[face_row_index][face_column_index] = old[old_row_index][old_column_index];
+            let (face_row_index, face_column_index) =
+                rotate_index(clockwise, row_index, column_index);
+            face[face_row_index][face_column_index] = old[row_index][column_index];
         }
     }
 }
