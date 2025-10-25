@@ -1,9 +1,9 @@
 use crate::*;
 
 pub const FACES_COUNT: usize = 6;
-pub const FACE_ROW_COUNT: usize = 3;
-pub const FACE_COLUMN_COUNT: usize = 3;
-pub const RUBIKS_CUBE_SHAPE: [usize; 3] = [FACE_COLUMN_COUNT, FACE_ROW_COUNT, FACE_COLUMN_COUNT];
+pub const ROW_COUNT: usize = 3;
+pub const COLUMN_COUNT: usize = 3;
+pub const SHAPE: [usize; 3] = [COLUMN_COUNT, ROW_COUNT, COLUMN_COUNT];
 
 #[derive(Debug, Clone, Copy)]
 pub struct RubiksCube {
@@ -15,7 +15,7 @@ pub struct RubiksCube {
     /// | 3    | Red    | Back   |
     /// | 4    | Green  | Right  |
     /// | 5    | Yellow | Down   |
-    faces: Tensor3<Color, { FACES_COUNT }, { FACE_ROW_COUNT }, { FACE_COLUMN_COUNT }>,
+    faces: Tensor3<Color, { FACES_COUNT }, { ROW_COUNT }, { COLUMN_COUNT }>,
 }
 impl RubiksCube {
     pub fn new() -> Self {
